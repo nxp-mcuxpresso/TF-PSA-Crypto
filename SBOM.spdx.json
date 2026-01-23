@@ -1,0 +1,53 @@
+{
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "spdxVersion": "SPDX-2.3",
+  "creationInfo": {
+    "created": "2026-02-06T09:57:02Z",
+    "creators": [
+      "Organization: NXP"
+    ],
+    "licenseListVersion": "3.26"
+  },
+  "name": "tf-psa-crypto-v26.03.00-pvw2",
+  "dataLicense": "CC0-1.0",
+  "documentNamespace": "https://nxp.com/spdx/67344f35-565d-41a5-be5b-d7a038bc28ea",
+  "packages": [
+    {
+      "SPDXID": "SPDXRef-package-67344f35-565d-41a5-be5b-d7a038bc28ea",
+      "name": "tf-psa-crypto",
+      "versionInfo": "v26.03.00-pvw2",
+      "licenseConcluded": "(Apache-2.0)",
+      "licenseDeclared": "(Apache-2.0)",
+      "downloadLocation": "https://github.com/nxp-mcuxpresso/tf-psa-crypto",
+      "originator": "Organization: NXP",
+      "supplier": "NOASSERTION",
+      "externalRefs": [],
+      "filesAnalyzed": false
+    },
+    {
+      "SPDXID": "SPDXRef-package-13459305-2681-455f-a065-4576836689be",
+      "name": "psa-crypto",
+      "versionInfo": "0.9.2",
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "Apache-2.0",
+      "homepage": "https://crates.io/crates/psa-crypto",
+      "downloadLocation": "NOASSERTION",
+      "originator": "Organization: psa-crypto",
+      "supplier": "NOASSERTION",
+      "externalRefs": [],
+      "filesAnalyzed": false
+    }
+  ],
+  "relationships": [
+    {
+      "spdxElementId": "SPDXRef-DOCUMENT",
+      "relationshipType": "DESCRIBES",
+      "relatedSpdxElement": "SPDXRef-package-67344f35-565d-41a5-be5b-d7a038bc28ea"
+    },
+    {
+      "spdxElementId": "SPDXRef-package-67344f35-565d-41a5-be5b-d7a038bc28ea",
+      "relationshipType": "DYNAMIC_LINK",
+      "relatedSpdxElement": "SPDXRef-package-13459305-2681-455f-a065-4576836689be"
+    }
+  ]
+}
