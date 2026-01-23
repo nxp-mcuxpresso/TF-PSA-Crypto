@@ -1,0 +1,53 @@
+{
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "spdxVersion": "SPDX-2.3",
+  "creationInfo": {
+    "created": "2026-05-12T07:44:43Z",
+    "creators": [
+      "Organization: NXP"
+    ],
+    "licenseListVersion": "3.26"
+  },
+  "name": "tf-psa-crypto-v26.06.00",
+  "dataLicense": "CC0-1.0",
+  "documentNamespace": "https://nxp.com/spdx/a96e9a7a-7131-45f6-b60a-8ab41fabe18e",
+  "packages": [
+    {
+      "SPDXID": "SPDXRef-package-a96e9a7a-7131-45f6-b60a-8ab41fabe18e",
+      "name": "tf-psa-crypto",
+      "versionInfo": "v26.06.00",
+      "licenseConcluded": "(Apache-2.0)",
+      "licenseDeclared": "(Apache-2.0)",
+      "downloadLocation": "https://github.com/nxp-mcuxpresso/tf-psa-crypto",
+      "originator": "Organization: NXP",
+      "supplier": "NOASSERTION",
+      "externalRefs": [],
+      "filesAnalyzed": false
+    },
+    {
+      "SPDXID": "SPDXRef-package-a96e9a7a-7131-45f6-b60a-8ab41fabe18e---5670bab2-d58d-405e-973f-a79d29c9c2b9",
+      "name": "Mbed-TLS/TF-PSA-Crypto",
+      "versionInfo": "v1.1.0",
+      "licenseConcluded": "Apache-2.0",
+      "licenseDeclared": "(Apache-2.0 AND GPL-2.0-only)",
+      "homepage": "https://github.com/Mbed-TLS/TF-PSA-Crypto",
+      "downloadLocation": "NOASSERTION",
+      "originator": "Organization: Mbed-TLS/TF-PSA-Crypto",
+      "supplier": "NOASSERTION",
+      "externalRefs": [],
+      "filesAnalyzed": false
+    }
+  ],
+  "relationships": [
+    {
+      "spdxElementId": "SPDXRef-DOCUMENT",
+      "relationshipType": "DESCRIBES",
+      "relatedSpdxElement": "SPDXRef-package-a96e9a7a-7131-45f6-b60a-8ab41fabe18e"
+    },
+    {
+      "spdxElementId": "SPDXRef-package-a96e9a7a-7131-45f6-b60a-8ab41fabe18e",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-package-a96e9a7a-7131-45f6-b60a-8ab41fabe18e---5670bab2-d58d-405e-973f-a79d29c9c2b9"
+    }
+  ]
+}

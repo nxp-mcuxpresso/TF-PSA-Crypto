@@ -11,6 +11,7 @@
 #define TF_PSA_CRYPTO_PSA_CRYPTO_RANDOM_IMPL_H
 
 #include "mbedtls/psa_util.h"
+#include "tf_psa_crypto_common.h" // MCUX edit (added for MBEDTLS_STATIC_ASSERT)
 
 #if defined(MBEDTLS_PSA_CRYPTO_EXTERNAL_RNG)
 
