@@ -44,6 +44,21 @@
 #include "../drivers/p256-m/p256-m_driver_entrypoints.h"
 
 #endif
+/* Headers for els_pkc opaque driver */
+#if defined(PSA_CRYPTO_DRIVER_ELS_PKC)
+#include "els_pkc_driver.h"
+
+#endif
+/* Headers for els_pkc transparent driver */
+#if defined(PSA_CRYPTO_DRIVER_ELS_PKC)
+#include "els_pkc_driver.h"
+
+#endif
+
+/* Headers for ele_s4xx driver */
+#if defined(PSA_CRYPTO_DRIVER_ELE_S4XX)
+#include "ele_s4xx.h"
+#endif
 
 /* END-driver headers */
 
@@ -55,6 +70,8 @@
 #define MBEDTLS_TEST_OPAQUE_DRIVER_ID (2)
 #define MBEDTLS_TEST_TRANSPARENT_DRIVER_ID (3)
 #define P256_TRANSPARENT_DRIVER_ID (4)
+#define ELE_S4XX_OPAQUE_DRIVER_ID (9)
+#define ELE_S4XX_TRANSPARENT_DRIVER_ID (10)
 
 /* END-driver id */
 
@@ -106,6 +123,26 @@ psa_status_t psa_driver_wrapper_get_key_buffer_size(
                     PSA_SUCCESS : PSA_ERROR_NOT_SUPPORTED );
 #endif /* PSA_CRYPTO_DRIVER_TEST */
 
+#if defined(PSA_CRYPTO_DRIVER_ELS_PKC)
+        case PSA_CRYPTO_ELS_PKC_LOCATION_S50_ENC_STORAGE_KEY:
+        case PSA_CRYPTO_ELS_PKC_LOCATION_S50_ENC_STORAGE_DATA:
+        case PSA_CRYPTO_ELS_PKC_LOCATION_S50_BLOB_STORAGE:
+        case PSA_CRYPTO_ELS_PKC_LOCATION_S50_KEY_GEN_STORAGE:
+        case PSA_CRYPTO_ELS_PKC_LOCATION_S50_RFC3394_STORAGE:
+            *key_buffer_size = els_pkc_opaque_size_function_key_buff_size( 
+                                                                attributes);
+            return( ( *key_buffer_size != 0 ) ?
+                    PSA_SUCCESS : PSA_ERROR_NOT_SUPPORTED );
+#endif /* PSA_CRYPTO_DRIVER_ELS_PKC */
+
+#if defined(PSA_CRYPTO_DRIVER_ELE_S4XX)
+        case PSA_CRYPTO_ELE_S4XX_LOCATION:
+            *key_buffer_size = ele_s4xx_opaque_size_function(key_type,
+                                                           key_bits );
+            return( ( *key_buffer_size != 0 ) ?
+                    PSA_SUCCESS : PSA_ERROR_NOT_SUPPORTED );
+            break;
+#endif /* PSA_CRYPTO_DRIVER_ELE_S4XX */
         default:
             (void)key_type;
             (void)key_bits;
@@ -159,6 +196,20 @@ psa_status_t psa_driver_wrapper_export_public_key(
                 return( status );
 #endif
 
+#if (defined(PSA_CRYPTO_DRIVER_ELS_PKC) )
+            status = els_pkc_transparent_export_public_key
+                (attributes,
+                                key_buffer,
+                                key_buffer_size,
+                                data,
+                                data_size,
+                                data_length
+            );
+
+            if( status != PSA_ERROR_NOT_SUPPORTED )
+                return( status );
+#endif
+
 
 #endif /* PSA_CRYPTO_ACCELERATOR_DRIVER_PRESENT */
             /* Fell through, meaning no accelerator supports this operation */
@@ -184,7 +235,33 @@ psa_status_t psa_driver_wrapper_export_public_key(
         ));
 #endif
 
+#if defined(PSA_CRYPTO_DRIVER_ELS_PKC)
+        case PSA_CRYPTO_ELS_PKC_LOCATION_S50_ENC_STORAGE_KEY:
+        case PSA_CRYPTO_ELS_PKC_LOCATION_S50_ENC_STORAGE_DATA:
+        case PSA_CRYPTO_ELS_PKC_LOCATION_S50_BLOB_STORAGE:
+        case PSA_CRYPTO_ELS_PKC_LOCATION_S50_KEY_GEN_STORAGE:
+        case PSA_CRYPTO_ELS_PKC_LOCATION_S50_RFC3394_STORAGE:
+            return( els_pkc_opaque_export_public_key
+            (attributes,
+                            key_buffer,
+                            key_buffer_size,
+                            data,
+                            data_size,
+                            data_length
+        ));
+#endif /* PSA_CRYPTO_DRIVER_ELS_PKC */
 
+#if (defined(PSA_CRYPTO_DRIVER_ELE_S4XX) )
+        case PSA_CRYPTO_ELE_S4XX_LOCATION:
+            return( ele_s4xx_opaque_export_public_key
+            (attributes,
+                            key_buffer,
+                            key_buffer_size,
+                            data,
+                            data_size,
+                            data_length
+        ));
+#endif
 #endif /* PSA_CRYPTO_ACCELERATOR_DRIVER_PRESENT */
         default:
             /* Key is declared with a lifetime not known to us */
