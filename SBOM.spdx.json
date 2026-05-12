@@ -2,20 +2,20 @@
   "SPDXID": "SPDXRef-DOCUMENT",
   "spdxVersion": "SPDX-2.3",
   "creationInfo": {
-    "created": "2026-02-06T09:57:02Z",
+    "created": "2026-05-12T07:44:43Z",
     "creators": [
       "Organization: NXP"
     ],
     "licenseListVersion": "3.26"
   },
-  "name": "tf-psa-crypto-v26.03.00-pvw2",
+  "name": "tf-psa-crypto-v26.06.00",
   "dataLicense": "CC0-1.0",
-  "documentNamespace": "https://nxp.com/spdx/67344f35-565d-41a5-be5b-d7a038bc28ea",
+  "documentNamespace": "https://nxp.com/spdx/a96e9a7a-7131-45f6-b60a-8ab41fabe18e",
   "packages": [
     {
-      "SPDXID": "SPDXRef-package-67344f35-565d-41a5-be5b-d7a038bc28ea",
+      "SPDXID": "SPDXRef-package-a96e9a7a-7131-45f6-b60a-8ab41fabe18e",
       "name": "tf-psa-crypto",
-      "versionInfo": "v26.03.00-pvw2",
+      "versionInfo": "v26.06.00",
       "licenseConcluded": "(Apache-2.0)",
       "licenseDeclared": "(Apache-2.0)",
       "downloadLocation": "https://github.com/nxp-mcuxpresso/tf-psa-crypto",
@@ -25,14 +25,14 @@
       "filesAnalyzed": false
     },
     {
-      "SPDXID": "SPDXRef-package-13459305-2681-455f-a065-4576836689be",
-      "name": "psa-crypto",
-      "versionInfo": "0.9.2",
+      "SPDXID": "SPDXRef-package-a96e9a7a-7131-45f6-b60a-8ab41fabe18e---5670bab2-d58d-405e-973f-a79d29c9c2b9",
+      "name": "Mbed-TLS/TF-PSA-Crypto",
+      "versionInfo": "v1.1.0",
       "licenseConcluded": "Apache-2.0",
-      "licenseDeclared": "Apache-2.0",
-      "homepage": "https://crates.io/crates/psa-crypto",
+      "licenseDeclared": "(Apache-2.0 AND GPL-2.0-only)",
+      "homepage": "https://github.com/Mbed-TLS/TF-PSA-Crypto",
       "downloadLocation": "NOASSERTION",
-      "originator": "Organization: psa-crypto",
+      "originator": "Organization: Mbed-TLS/TF-PSA-Crypto",
       "supplier": "NOASSERTION",
       "externalRefs": [],
       "filesAnalyzed": false
@@ -42,12 +42,12 @@
     {
       "spdxElementId": "SPDXRef-DOCUMENT",
       "relationshipType": "DESCRIBES",
-      "relatedSpdxElement": "SPDXRef-package-67344f35-565d-41a5-be5b-d7a038bc28ea"
+      "relatedSpdxElement": "SPDXRef-package-a96e9a7a-7131-45f6-b60a-8ab41fabe18e"
     },
     {
-      "spdxElementId": "SPDXRef-package-67344f35-565d-41a5-be5b-d7a038bc28ea",
-      "relationshipType": "DYNAMIC_LINK",
-      "relatedSpdxElement": "SPDXRef-package-13459305-2681-455f-a065-4576836689be"
+      "spdxElementId": "SPDXRef-package-a96e9a7a-7131-45f6-b60a-8ab41fabe18e",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-package-a96e9a7a-7131-45f6-b60a-8ab41fabe18e---5670bab2-d58d-405e-973f-a79d29c9c2b9"
     }
   ]
 }
