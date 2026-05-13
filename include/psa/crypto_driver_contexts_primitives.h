@@ -43,6 +43,10 @@
 #include "hashcrypt_crypto_primitives.h"
 #endif
 
+#if defined(PSA_CRYPTO_DRIVER_DCP)
+#include "dcp_crypto_primitives.h"
+#endif 
+
 #if defined(PSA_CRYPTO_DRIVER_TEST)
 
 #if defined(MBEDTLS_TEST_LIBTESTDRIVER1) && \
@@ -118,6 +122,9 @@ typedef union {
 #endif
 #if defined(PSA_CRYPTO_DRIVER_HASHCRYPT)
     mcux_hashcrypt_hash_operation_t hashcrypt_driver_ctx;
+#endif
+#if defined(PSA_CRYPTO_DRIVER_DCP)
+    mcux_dcp_hash_operation_t dcp_driver_ctx;
 #endif
 } psa_driver_hash_context_t;
 
