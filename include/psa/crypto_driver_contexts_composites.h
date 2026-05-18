@@ -35,6 +35,10 @@
 #include "tf-psa-crypto/private/crypto_struct_pqcp.h"
 #endif
 
+#if defined(PSA_CRYPTO_DRIVER_SGI)
+#include "sgi_crypto_primitives.h"
+#endif
+
 #if defined(MBEDTLS_TEST_LIBTESTDRIVER1)
 #if defined(TF_PSA_CRYPTO_TEST_LIBTESTDRIVER1)
 #include "mbedtls/private/libtestdriver1-crypto_builtin_composites.h"
@@ -127,6 +131,9 @@ typedef union {
     mbedtls_transparent_test_driver_mac_operation_t transparent_test_driver_ctx;
     mbedtls_opaque_test_driver_mac_operation_t opaque_test_driver_ctx;
 #endif
+#if defined(PSA_CRYPTO_DRIVER_SGI)
+    sgi_mac_operation_t sgi_driver_ctx;
+#endif
 } psa_driver_mac_context_t;
 
 typedef union {
@@ -134,6 +141,9 @@ typedef union {
     mbedtls_psa_aead_operation_t mbedtls_ctx;
 #if defined(PSA_CRYPTO_DRIVER_TEST)
     mbedtls_transparent_test_driver_aead_operation_t transparent_test_driver_ctx;
+#endif
+#if defined(PSA_CRYPTO_DRIVER_SGI)
+    sgi_aead_operation_t sgi_driver_ctx;
 #endif
 } psa_driver_aead_context_t;
 
