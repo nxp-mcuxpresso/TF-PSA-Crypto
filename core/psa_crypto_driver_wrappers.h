@@ -1184,7 +1184,8 @@ static inline psa_status_t psa_driver_wrapper_generate_key(
                 if( status != PSA_ERROR_NOT_SUPPORTED )
                     break;
 #endif /* PSA_CRYPTO_DRIVER_PKC */
-#if defined(PSA_CRYPTO_DRIVER_CASPER)
+#if defined(PSA_CRYPTO_DRIVER_CASPER) 
+#if defined(MBEDTLS_BIGNUM_C) && defined(MBEDTLS_ECP_C) && defined(PSA_WANT_KEY_TYPE_ECC_PUBLIC_KEY)
                 if( PSA_KEY_TYPE_IS_ECC( psa_get_key_type(attributes) ) &&
                     PSA_KEY_TYPE_ECC_GET_FAMILY(psa_get_key_type(attributes)) == PSA_ECC_FAMILY_SECP_R1 &&
                     (
@@ -1201,6 +1202,7 @@ static inline psa_status_t psa_driver_wrapper_generate_key(
                     if( status != PSA_ERROR_NOT_SUPPORTED )
                         break;
                 }
+#endif /* MBEDTLS_ECP_C && MBEDTLS_BIGNUM_C && PSA_WANT_KEY_TYPE_ECC_PUBLIC_KEY */
 #endif /* PSA_CRYPTO_DRIVER_CASPER */
             }
 #endif /* PSA_CRYPTO_ACCELERATOR_DRIVER_PRESENT */
