@@ -36,6 +36,10 @@
 #include "sgi_crypto_primitives.h"
 #endif
 
+#if defined(PSA_CRYPTO_DRIVER_ELS_PKC)
+#include "els_pkc_crypto_composites.h"
+#endif
+
 #if defined(MBEDTLS_TEST_LIBTESTDRIVER1)
 #if defined(TF_PSA_CRYPTO_TEST_LIBTESTDRIVER1)
 #include "mbedtls/private/libtestdriver1-crypto_builtin_composites.h"
@@ -135,6 +139,9 @@ typedef union {
     ele_s2xx_transparent_mac_operation_t transparent_ele_s2xx_driver_ctx;
     ele_s2xx_opaque_mac_operation_t opaque_ele_s2xx_driver_ctx;
 #endif
+#if defined(PSA_CRYPTO_DRIVER_ELS_PKC)
+    els_pkc_transparent_mac_operation_t els_pkc_driver_ctx;
+#endif
 } psa_driver_mac_context_t;
 
 typedef union {
@@ -145,6 +152,9 @@ typedef union {
 #endif
 #if defined(PSA_CRYPTO_DRIVER_SGI)
     sgi_aead_operation_t sgi_driver_ctx;
+#endif
+#if defined(PSA_CRYPTO_DRIVER_ELS_PKC)
+    els_pkc_transparent_aead_operation_t els_pkc_driver_ctx;
 #endif
 } psa_driver_aead_context_t;
 
