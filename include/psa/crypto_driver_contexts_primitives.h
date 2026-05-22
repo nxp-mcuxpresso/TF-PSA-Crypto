@@ -51,6 +51,10 @@
 #include "sgi_crypto_primitives.h"
 #endif
 
+#if defined(PSA_CRYPTO_DRIVER_CAAM)
+#include "caam_crypto_primitives.h"
+#endif
+
 #if defined(PSA_CRYPTO_DRIVER_ELE_S2XX)
 #include "ele_s2xx_crypto_primitives.h"
 #endif
@@ -147,6 +151,9 @@ typedef union {
 #endif
 #if defined(PSA_CRYPTO_DRIVER_SGI)
     mcux_sgi_hash_operation_t sgi_driver_ctx;
+#endif
+#if defined(PSA_CRYPTO_DRIVER_CAAM)
+    mcux_caam_hash_operation_t caam_driver_ctx;
 #endif
 #if defined(PSA_CRYPTO_DRIVER_ELE_S2XX)
     ele_s2xx_hash_operation_t ele_driver_ctx;
