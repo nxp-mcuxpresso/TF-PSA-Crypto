@@ -4409,6 +4409,21 @@ static inline psa_status_t psa_driver_wrapper_key_agreement(
             if( status != PSA_ERROR_NOT_SUPPORTED )
                 return( status );
 #endif /* PSA_CRYPTO_DRIVER_PKC */
+#if defined(PSA_CRYPTO_DRIVER_CASPER)
+#if defined(MBEDTLS_BIGNUM_C) && defined(MBEDTLS_ECP_C)
+            status = casper_psa_key_agreement_ecdh( attributes,
+                                                    key_buffer,
+                                                    key_buffer_size,
+                                                    alg,
+                                                    peer_key,
+                                                    peer_key_length,
+                                                    shared_secret,
+                                                    shared_secret_size,
+                                                    shared_secret_length);
+            if( status != PSA_ERROR_NOT_SUPPORTED )
+                return( status );
+#endif /* MBEDTLS_ECP_C && MBEDTLS_BIGNUM_C */
+#endif /* PSA_CRYPTO_DRIVER_CASPER */
 #endif /* PSA_CRYPTO_ACCELERATOR_DRIVER_PRESENT */
 
             /* Software Fallback */
