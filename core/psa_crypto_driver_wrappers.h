@@ -4403,6 +4403,9 @@ static inline psa_status_t psa_driver_wrapper_key_agreement(
                                           shared_secret,
                                           shared_secret_size,
                                           shared_secret_length);
+
+            if( status != PSA_ERROR_NOT_SUPPORTED )
+                return( status );
 #endif /* PSA_CRYPTO_DRIVER_PKC */
 #endif /* PSA_CRYPTO_ACCELERATOR_DRIVER_PRESENT */
 
