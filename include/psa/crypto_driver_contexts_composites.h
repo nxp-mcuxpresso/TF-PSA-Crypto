@@ -43,6 +43,10 @@
 #include "els_pkc_crypto_composites.h"
 #endif
 
+#if defined(PSA_CRYPTO_DRIVER_ELE_HSEB)
+#include "ele_hseb_crypto_composites.h"
+#endif
+
 #if defined(MBEDTLS_TEST_LIBTESTDRIVER1)
 #if defined(TF_PSA_CRYPTO_TEST_LIBTESTDRIVER1)
 #include "mbedtls/private/libtestdriver1-crypto_builtin_composites.h"
@@ -144,6 +148,9 @@ typedef union {
 #endif
 #if defined(PSA_CRYPTO_DRIVER_ELS_PKC)
     els_pkc_transparent_mac_operation_t els_pkc_driver_ctx;
+#endif
+#if defined(PSA_CRYPTO_DRIVER_ELE_HSEB)
+    ele_hseb_transparent_mac_operation_t transparent_ele_hseb_driver_ctx;
 #endif
 } psa_driver_mac_context_t;
 
