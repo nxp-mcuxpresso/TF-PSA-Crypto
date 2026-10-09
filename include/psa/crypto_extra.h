@@ -244,6 +244,88 @@ void mbedtls_psa_get_stats(mbedtls_psa_stats_t *stats);
 #define PSA_ALG_IS_VENDOR_HASH_AND_SIGN(alg)    \
     PSA_ALG_IS_DSA(alg)
 
+/* NXP-added START */
+/* These are non-compliant with the PSA spec, but the TF-PSA-Crypto integration
+ * seems to be using the parameter set values as the bit sizes.
+ * Use these macros everywhere instead of hardcoded values and we can swap
+ * to the PSA spec-compliant version once TF-PSA-Crypto swaps.
+ */
+#define PSA_ML_DSA_44_BITS ((size_t) 44u)
+#define PSA_ML_DSA_65_BITS ((size_t) 65u)
+#define PSA_ML_DSA_87_BITS ((size_t) 87u)
+
+/** The type of an ML-DSA key pair.
+ *
+ * It is represented as just the 32-byte seed.
+ *
+ * The `bits` attribute of the key indicates the parameter set:
+ * 44, 56 or 87.
+ */
+#if !defined(PSA_KEY_TYPE_ML_DSA_KEY_PAIR)
+#define PSA_KEY_TYPE_ML_DSA_KEY_PAIR ((psa_key_type_t) 0x7002)
+#endif
+
+/** The type of an ML-DSA public key.
+ *
+ * The `bits` attribute of the key indicates the parameter set:
+ * 44, 56 or 87.
+ */
+#if !defined(PSA_KEY_TYPE_ML_DSA_PUBLIC_KEY)
+#define PSA_KEY_TYPE_ML_DSA_PUBLIC_KEY ((psa_key_type_t) 0x4002)
+#endif
+
+/** Whether the key type is an ML-DSA key (key pair or public key). */
+#if !defined(PSA_KEY_TYPE_IS_ML_DSA)
+#define PSA_KEY_TYPE_IS_ML_DSA(type)                                    \
+    ((type) == PSA_KEY_TYPE_ML_DSA_PUBLIC_KEY ||                        \
+     (type) == PSA_KEY_TYPE_ML_DSA_KEY_PAIR)
+#endif
+
+/** Hedged pure ML-DSA (without pre-hashing). */
+#if !defined(PSA_ALG_ML_DSA)
+#define PSA_ALG_ML_DSA ((psa_algorithm_t) 0x06004400)
+#endif
+
+/** Deterministic pure ML-DSA (without pre-hashing). */
+#if !defined(PSA_ALG_DETERMINISTIC_ML_DSA)
+#define PSA_ALG_DETERMINISTIC_ML_DSA ((psa_algorithm_t) 0x06004500)
+#endif
+
+/** Whether the given algorithm is a pure ML-DSA algorithm
+ * (without pre-hashing).
+ */
+#if !defined(PSA_ALG_IS_ML_DSA)
+#define PSA_ALG_IS_ML_DSA(alg)                \
+    ((alg) == PSA_ALG_DETERMINISTIC_ML_DSA || \
+     (alg) == PSA_ALG_ML_DSA)
+#endif
+
+#if !defined(PSA_MLDSA_SIGNATURE_SIZE)
+#define PSA_MLDSA_SIGNATURE_SIZE(bits)          \
+    ((bits) == PSA_ML_DSA_44_BITS ? 2420u :                     \
+     (bits) == PSA_ML_DSA_65_BITS ? 3309u :                     \
+     (bits) == PSA_ML_DSA_87_BITS ? 4627u :                     \
+     0u)
+#endif
+
+#if !defined(PSA_MLDSA_SIGNATURE_MAX_SIZE)
+#define PSA_MLDSA_SIGNATURE_MAX_SIZE (PSA_MLDSA_SIGNATURE_SIZE(PSA_ML_DSA_87_BITS))
+#endif
+
+/** All transparent ML-DSA key types are a 32 byte seed. */
+#if !defined(PSA_KEY_EXPORT_ML_DSA_KEY_PAIR_SIZE)
+#define PSA_KEY_EXPORT_ML_DSA_KEY_PAIR_SIZE (32u)
+#endif
+
+#if !defined(PSA_KEY_EXPORT_ML_DSA_PUBLIC_KEY_MAX_SIZE)
+#define PSA_KEY_EXPORT_ML_DSA_PUBLIC_KEY_MAX_SIZE(bits) \
+        ((bits) == PSA_ML_DSA_44_BITS ? 1312u : \
+         (bits) == PSA_ML_DSA_65_BITS ? 1952u : \
+         (bits) == PSA_ML_DSA_87_BITS ? 2592u : \
+         0u)
+#endif
+/* NXP-added END */
+
 /**@}*/
 
 /** \addtogroup attributes

@@ -1353,7 +1353,8 @@ psa_status_t psa_export_key_internal(
     if (key_type_is_raw_bytes(type) ||
         PSA_KEY_TYPE_IS_RSA(type)   ||
         PSA_KEY_TYPE_IS_ECC(type)   ||
-        PSA_KEY_TYPE_IS_DH(type)) {
+        PSA_KEY_TYPE_IS_DH(type)    || /* NXP-added */
+        PSA_KEY_TYPE_IS_ML_DSA(type)) {
         return psa_export_key_buffer_internal(
             key_buffer, key_buffer_size,
             data, data_size, data_length);
@@ -3074,7 +3075,8 @@ static psa_status_t psa_sign_verify_check_alg(int input_is_message,
      * sign-message which needs to hash first for all algorithms
      * supported at the moment. */
 
-    if (hash_alg == 0 && input_is_message) {
+    if (hash_alg == 0 && input_is_message &&
+        !(alg == PSA_ALG_PURE_EDDSA || alg == PSA_ALG_ML_DSA) /* NXP-added */ ) {
         return PSA_ERROR_INVALID_ARGUMENT;
     }
     if (hash_alg == PSA_ALG_ANY_HASH) {
@@ -8388,6 +8390,17 @@ static psa_status_t psa_validate_key_type_and_size_for_key_generation(
         }
     } else
 #endif /* defined(PSA_WANT_KEY_TYPE_DH_KEY_PAIR_GENERATE) */
+
+#if defined(PSA_WANT_KEY_TYPE_ML_DSA_KEY_PAIR_GENERATE)
+    /* NXP-added */
+    if (PSA_KEY_TYPE_IS_ML_DSA(type) && PSA_KEY_TYPE_IS_KEY_PAIR(type)) {
+        if (PSA_ML_DSA_44_BITS != bits &&
+            PSA_ML_DSA_65_BITS != bits &&
+            PSA_ML_DSA_87_BITS != bits) {
+            return PSA_ERROR_INVALID_ARGUMENT;
+        }
+    } else
+#endif /* defined(PSA_WANT_KEY_TYPE_ML_DSA_KEY_PAIR_GENERATE) */
     {
         return PSA_ERROR_NOT_SUPPORTED;
     }
